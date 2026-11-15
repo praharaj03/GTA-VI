@@ -28,7 +28,7 @@
 }
 
 body {
-  width: 100dvw;
+  width: 100%;
   overflow-x: hidden;
   font-family: "Round", sans-serif;
   background-color: black;
@@ -73,10 +73,10 @@ main {
     @apply w-dvw h-dvh relative overflow-hidden;
 
     .scale-out {
-      @apply object-cover md:scale-125 h-full;
+      @apply w-full object-cover md:scale-125 h-full;
     }
     .title-logo {
-      @apply absolute h-full md:scale-125 top-0 object-cover;
+      @apply absolute w-full h-full md:scale-125 top-0 left-0 object-cover;
     }
     .trailer-logo {
       @apply absolute -bottom-5 w-48 left-1/2 -translate-x-1/2;
@@ -199,10 +199,10 @@ main {
         @apply absolute z-10 w-full h-full;
       }
 
-      button {
-        @apply rounded-full bg-white absolute left-1/2 -translate-x-1/2 md:bottom-16 -bottom-28 md:w-fit w-2/3 px-5 md:px-7 py-4 text-lg;
-      }
     }
+  }
+  .post-card-button {
+    @apply rounded-full bg-white absolute z-20 left-1/2 -translate-x-1/2 bottom-96 w-fit px-7 py-4 text-lg whitespace-nowrap transition-colors hover:bg-yellow;
   }
   .final {
     @apply relative h-dvh overflow-hidden;
@@ -251,4 +251,235 @@ main {
 
 .lucia-life-content {
   background: radial-gradient(ellipse, #111117 20%, transparent 70%);
+}
+
+/* Use stable viewport heights so the mobile address bar does not resize pins. */
+@media (max-width: 1023px) {
+  nav {
+    padding: max(1rem, env(safe-area-inset-top)) 1.25rem 1rem;
+  }
+
+  nav > img:last-child {
+    width: 1.75rem;
+  }
+
+  .hero-section {
+    height: auto;
+  }
+
+  .hero-section .mask-wrapper {
+    position: relative;
+    height: 100svh;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+
+  .hero-section .mask-logo,
+  .hero-section .fake-logo-wrapper {
+    display: none;
+  }
+
+  .entrance-message {
+    position: relative;
+    inset: auto;
+    height: auto;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+
+  .entrance-message > div {
+    min-height: 100svh;
+  }
+
+  .hero-section .scale-out,
+  .hero-section .title-logo {
+    object-position: center;
+    scale: 1;
+    transform: none;
+  }
+
+  .hero-section .trailer-logo {
+    bottom: max(1.5rem, env(safe-area-inset-bottom));
+    width: 10rem;
+  }
+
+  .hero-section .play-img {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .entrance-message > div,
+  .final-message > div {
+    gap: clamp(1.25rem, 4svh, 2rem);
+    padding: 5rem 1.25rem 2rem;
+  }
+
+  .entrance-message .entrance-logo {
+    position: static;
+    width: clamp(7rem, 20svh, 11rem);
+    max-height: 25svh;
+    object-fit: contain;
+    transform: none;
+    translate: none;
+  }
+
+  .entrance-message .text-wrapper {
+    margin: 0;
+  }
+
+  .gradient-title {
+    font-size: clamp(2.75rem, min(11vw, 9svh), 5rem);
+    line-height: 0.95;
+  }
+
+  .entrance-message .flex-center,
+  .final-message .flex-center {
+    gap: 1.5rem;
+  }
+
+  .entrance-message .flex-center img:first-child,
+  .final-message .flex-center img:first-child {
+    width: clamp(3rem, 17vw, 5rem);
+  }
+
+  .entrance-message .flex-center img:last-child,
+  .final-message .flex-center img:last-child {
+    width: clamp(6rem, 33vw, 10rem);
+  }
+
+  .first-vd-wrapper > div,
+  .lucia > div,
+  .final {
+    height: 65svh;
+    min-height: 20rem;
+    max-height: 44rem;
+  }
+
+  .jason,
+  .lucia-life {
+    width: 100%;
+    margin-top: 0;
+    padding: 4rem 1.25rem;
+    gap: 1.25rem;
+    overflow: hidden;
+  }
+
+  .jason-content,
+  .lucia-life-content,
+  .lucia-life-content > div {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  .jason h1,
+  .lucia-life h1 {
+    margin-bottom: 1.5rem;
+    font-size: clamp(3rem, 12vw, 5.5rem);
+    line-height: 1;
+  }
+
+  .jason h2,
+  .lucia-life h2 {
+    margin-bottom: 1.25rem;
+    padding: 0;
+    font-size: clamp(1.5rem, 5.5vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .jason p,
+  .lucia-life p {
+    max-width: 42rem;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .jason .img-box,
+  .lucia-life .img-box {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lucia-life-content {
+    order: -1;
+  }
+
+  .jason .jason-1,
+  .jason .jason-2,
+  .jason .jason-3,
+  .lucia-life .lucia-1,
+  .lucia-life .lucia-2,
+  .lucia-life .lucia-3 {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    margin: 0;
+    transform: none;
+    translate: none;
+    overflow: hidden;
+  }
+
+  .jason .jason-2,
+  .lucia-life .lucia-2 {
+    margin: 2rem 0;
+  }
+
+  .jason .jason-3,
+  .lucia-life .lucia-3 {
+    aspect-ratio: 4 / 3;
+  }
+
+  .lucia-life p:last-of-type {
+    display: block;
+  }
+
+  .post-card {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .post-card .animated-gradient-bg {
+    inset: 0;
+    height: 100%;
+  }
+
+  .post-card .post-card-wrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    margin: 0;
+  }
+
+  .post-card-button {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    max-width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    transform: none;
+    translate: none;
+  }
+
+  .final .final-content {
+    transform: none;
+  }
+
+  .final-message {
+    position: relative;
+    min-height: 100svh;
+    height: auto;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .final-message > div {
+    min-height: 100svh;
+  }
+
+  .final-message > div > img {
+    width: clamp(7rem, 20svh, 11rem);
+  }
 }
