@@ -8,9 +8,12 @@ const Hero = () => {
   const { initialMaskPos, initialMaskSize, maskPos, maskSize } = useMaskSettings();
 
   useGSAP(() => {
-    gsap.set('.mask-wrapper', {
-      maskPosition: initialMaskPos,
-      maskSize: initialMaskSize,
+    const media = gsap.matchMedia();
+
+    media.add('(min-width: 1024px)', () => {
+      gsap.set('.mask-wrapper', {
+        maskPosition: initialMaskPos,
+        maskSize: initialMaskSize,
     });
 
     gsap.set('.mask-logo', { marginTop: '-100vh', opacity: 0 });
@@ -30,13 +33,16 @@ const Hero = () => {
     tl
       .to('.fade-out', { opacity: 0, ease: 'power1.inOut' })
       .to('.scale-out', { scale: 1, ease: 'power1.inOut' })
-      .to('.mask-wrapper', { maskSize, ease: 'power1.inOut' }, '<')
+      .to('.mask-wrapper', { maskSize, maskPosition: maskPos, ease: 'power1.inOut' }, '<')
       .to('.mask-wrapper', { opacity: 0 })
       .to('.overlay-logo', { opacity: 1, onComplete: () => {
         gsap.to('.overlay-logo', { opacity: 0 });
       } }, '<')
       .to('.entrance-message', { duration: 1, ease: 'power1.inOut', maskImage: 'radial-gradient(circle at 50% 0vh, black 50%, transparent 100%)' }, '<')
-  });
+    });
+
+    return () => media.revert();
+  }, { dependencies: [initialMaskPos, initialMaskSize, maskPos, maskSize], revertOnUpdate: true });
 
   return (
     <section className="hero-section">
